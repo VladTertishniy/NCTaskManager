@@ -1,5 +1,7 @@
 package ua.edu.sumdu.j2se.tertishniy.tasks;
 
+import java.util.Objects;
+
 public class Task {
     private String title;
     private int time;
@@ -10,12 +12,30 @@ public class Task {
     private boolean repeated;
 
     public Task(String title, int time) {
+        if (time < 0) {
+            throw new IllegalArgumentException("The time must be greater than 0");
+        }
+        if (title == null) {
+            throw new IllegalArgumentException("The title of task must be set");
+        }
         this.title = title;
         this.time = time;
         this.active = false;
     }
 
     public Task(String title, int end, int interval, int start) {
+        if (title == null) {
+            throw new IllegalArgumentException("The title of task must be set");
+        }
+        if (end <= 0) {
+            throw new IllegalArgumentException("The end must be greater than 0");
+        }
+        if (interval <= 0) {
+            throw new IllegalArgumentException("The interval must be greater than 0");
+        }
+        if (start < 0) {
+            throw new IllegalArgumentException("The start must be greater than 0");
+        }
         this.title = title;
         this.end = end;
         this.interval = interval;
@@ -32,6 +52,9 @@ public class Task {
     }
 
     public void setTitle(String title) {
+        if (title == null) {
+            throw new IllegalArgumentException("The title of task must be set");
+        }
         this.title = title;
     }
 
@@ -48,6 +71,9 @@ public class Task {
     }
 
     public void setTime(int time){
+        if (time < 0) {
+            throw new IllegalArgumentException("The time must be greater than 0");
+        }
         if (repeated) {
             this.time = time;
             repeated = false;
@@ -73,6 +99,15 @@ public class Task {
     }
 
     public void setTime(int start, int end, int interval){
+        if (end <= 0) {
+            throw new IllegalArgumentException("The end must be greater than 0");
+        }
+        if (interval <= 0) {
+            throw new IllegalArgumentException("The interval must be greater than 0");
+        }
+        if (start < 0) {
+            throw new IllegalArgumentException("The start must be greater than 0");
+        }
         if (!repeated) {
             this.repeated = true;
             this.start = start;
@@ -91,6 +126,9 @@ public class Task {
     }
 
     public int nextTimeAfter(int current) {
+        if (current < 0) {
+            throw new IllegalArgumentException("Current time can not be less than 0");
+        }
         if (active && !repeated){
             if (current < time) return time;
             else return -1;
@@ -106,5 +144,24 @@ public class Task {
             }
         }
         return -1;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task)) return false;
+        Task task = (Task) o;
+        return getTime() == task.getTime() &&
+                end == task.end &&
+                interval == task.interval &&
+                start == task.start &&
+                isActive() == task.isActive() &&
+                isRepeated() == task.isRepeated() &&
+                Objects.equals(getTitle(), task.getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTitle(), getTime(), end, interval, start, isActive(), isRepeated());
     }
 }
