@@ -18,7 +18,7 @@ public class ArrayTaskList {
         taskList = new Task[amount];
     }
 
-    void add(Task task) {
+    public void add(Task task) {
         if(task == null){
             throw new IllegalArgumentException("Try to remove an empty task");
         }

@@ -23,7 +23,7 @@ public class Task {
         this.active = false;
     }
 
-    public Task(String title, int end, int interval, int start) {
+    public Task(String title, int start, int end, int interval) {
         if (title == null) {
             throw new IllegalArgumentException("The title of task must be set");
         }
@@ -41,6 +41,7 @@ public class Task {
         this.interval = interval;
         this.start = start;
         this.active = false;
+        this.repeated = true;
     }
 
     public String getTitle() {
@@ -92,7 +93,7 @@ public class Task {
     }
 
     public int getRepeatInterval(){
-        if (!repeated) {
+        if (repeated) {
             return interval;
         }
         else return 0;
