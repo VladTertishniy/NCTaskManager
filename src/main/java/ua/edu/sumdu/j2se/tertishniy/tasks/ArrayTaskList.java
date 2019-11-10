@@ -3,7 +3,7 @@ package ua.edu.sumdu.j2se.tertishniy.tasks;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class ArrayTaskList {
+public class ArrayTaskList extends AbstractTaskList {
 
     private Task [] taskList = new Task [5];
     private int amOfTasks;
@@ -20,7 +20,7 @@ public class ArrayTaskList {
 
     public void add(Task task) {
         if(task == null){
-            throw new IllegalArgumentException("Try to remove an empty task");
+            throw new IllegalArgumentException("Try to add an empty task");
         }
         if(amOfTasks == taskList.length){
             Task [] temp = new Task[(int)(taskList.length * 1.2) + 1];
@@ -63,7 +63,7 @@ public class ArrayTaskList {
         }
     }
 
-    public ArrayTaskList incoming(int from, int to){
+    /*public ArrayTaskList incoming(int from, int to){
         if (from < 0) {
             throw new IllegalArgumentException("The from must be greater than 0");
         }
@@ -79,7 +79,7 @@ public class ArrayTaskList {
             }
         }
         return subset;
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {
