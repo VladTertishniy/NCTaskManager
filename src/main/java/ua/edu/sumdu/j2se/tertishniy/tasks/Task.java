@@ -2,7 +2,7 @@ package ua.edu.sumdu.j2se.tertishniy.tasks;
 
 import java.util.Objects;
 
-public class Task {
+public class Task implements Cloneable {
     private String title;
     private int time;
     private int end;
@@ -152,17 +152,50 @@ public class Task {
         if (this == o) return true;
         if (!(o instanceof Task)) return false;
         Task task = (Task) o;
-        return getTime() == task.getTime() &&
+        /*return getTime() == task.getTime() &&
                 end == task.end &&
                 interval == task.interval &&
                 start == task.start &&
                 isActive() == task.isActive() &&
                 isRepeated() == task.isRepeated() &&
-                Objects.equals(getTitle(), task.getTitle());
+                Objects.equals(getTitle(), task.getTitle());*/
+        if (!((Task) o).repeated){
+            return end == task.end &&
+                    interval == task.interval &&
+                    start == task.start &&
+                    isActive() == task.isActive() &&
+                    isRepeated() == task.isRepeated() &&
+                    Objects.equals(getTitle(), task.getTitle());
+        }else {
+            return getTime() == task.getTime() &&
+                    Objects.equals(getTitle(), task.getTitle()) &&
+                    isActive() == task.isActive() &&
+                    isRepeated() == task.isRepeated();
+        }
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getTitle(), getTime(), end, interval, start, isActive(), isRepeated());
+    }
+
+    @Override
+    public Task clone() throws CloneNotSupportedException {
+        Task temp = (Task) super.clone();
+        temp.title = this.title;
+        return temp;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "title='" + title + '\'' +
+                ", time=" + time +
+                ", end=" + end +
+                ", interval=" + interval +
+                ", start=" + start +
+                ", active=" + active +
+                ", repeated=" + repeated +
+                '}';
     }
 }
