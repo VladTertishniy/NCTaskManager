@@ -1,18 +1,20 @@
 package ua.edu.sumdu.j2se.tertishniy.tasks;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Task implements Cloneable {
+public class Task implements Cloneable, Serializable {
     private String title;
-    private int time;
-    private int end;
+    private LocalDateTime time;
+    private LocalDateTime end;
     private int interval;
-    private int start;
+    private LocalDateTime start;
     private boolean active;
     private boolean repeated;
 
-    public Task(String title, int time) {
-        if (time < 0) {
+    public Task(String title, LocalDateTime time) {
+        if (time == null) {
             throw new IllegalArgumentException("The time must be greater than 0");
         }
         if (title == null) {
@@ -23,19 +25,19 @@ public class Task implements Cloneable {
         this.active = false;
     }
 
-    public Task(String title, int start, int end, int interval) {
+    public Task(String title, LocalDateTime start, LocalDateTime end, int interval) {
         if (title == null) {
             throw new IllegalArgumentException("The title of task must be set");
         }
-        if (end <= 0) {
+        /*if (end <= 0) {
             throw new IllegalArgumentException("The end must be greater than 0");
-        }
+        }*/
         if (interval <= 0) {
             throw new IllegalArgumentException("The interval must be greater than 0");
         }
-        if (start < 0) {
+        /*if (start < 0) {
             throw new IllegalArgumentException("The start must be greater than 0");
-        }
+        }*/
         this.title = title;
         this.end = end;
         this.interval = interval;
@@ -63,7 +65,7 @@ public class Task implements Cloneable {
         this.active = active;
     }
 
-    public int getTime(){
+    public LocalDateTime getTime(){
 
         if (repeated) {
             return start;
@@ -71,10 +73,10 @@ public class Task implements Cloneable {
         else return time;
     }
 
-    public void setTime(int time){
-        if (time < 0) {
+    public void setTime(LocalDateTime time){
+        /*if (time < 0) {
             throw new IllegalArgumentException("The time must be greater than 0");
-        }
+        }*/
         if (repeated) {
             this.time = time;
             repeated = false;
@@ -82,12 +84,12 @@ public class Task implements Cloneable {
         else this.time = time;
     }
 
-    public int getStartTime(){
+    public LocalDateTime getStartTime(){
         if (!repeated) return time;
         else return start;
     }
 
-    public int getEndTime(){
+    public LocalDateTime getEndTime(){
         if (!repeated) return time;
         else return end;
     }
@@ -99,16 +101,16 @@ public class Task implements Cloneable {
         else return 0;
     }
 
-    public void setTime(int start, int end, int interval){
-        if (end <= 0) {
+    public void setTime(LocalDateTime start, LocalDateTime end, int interval){
+        /*if (end <= 0) {
             throw new IllegalArgumentException("The end must be greater than 0");
-        }
+        }*/
         if (interval <= 0) {
             throw new IllegalArgumentException("The interval must be greater than 0");
         }
-        if (start < 0) {
+        /*if (start < 0) {
             throw new IllegalArgumentException("The start must be greater than 0");
-        }
+        }*/
         if (!repeated) {
             this.repeated = true;
             this.start = start;
@@ -126,25 +128,25 @@ public class Task implements Cloneable {
         return repeated;
     }
 
-    public int nextTimeAfter(int current) {
-        if (current < 0) {
+    public LocalDateTime nextTimeAfter(LocalDateTime current) {
+        /*if (current < 0) {
             throw new IllegalArgumentException("Current time can not be less than 0");
-        }
+        }*/
         if (active && !repeated){
-            if (current < time) return time;
-            else return -1;
+            if (current.isBefore(time)) return time;
+            else return null;
         } else if (active) {
-            if (current > end) return -1;
-            else if (current < start) return  start;
+            if (current.isAfter(end)) return null;
+            else if (current.isBefore(start)) return  start;
             else {
-                int checkTime = start;
-                while (checkTime <= end) {
-                    if (checkTime > current) return checkTime;
-                    else checkTime += interval;
+                LocalDateTime checkTime = start;
+                while (checkTime.isBefore(end) || checkTime.equals(end)) {
+                    if (checkTime.isAfter(current)) return checkTime;
+                    else checkTime = checkTime.plusSeconds(interval);
                 }
             }
         }
-        return -1;
+        return null;
     }
 
     @Override

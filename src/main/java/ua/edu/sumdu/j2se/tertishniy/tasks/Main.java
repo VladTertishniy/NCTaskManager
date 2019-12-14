@@ -5,6 +5,8 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -43,14 +45,14 @@ public class Main {
 			}
 		}*/
 
-		Task task1 = new Task("Пробежка", 10, 20, 5);
+		/*Task task1 = new Task("Пробежка", 10, 20, 5);
 		try (Socket socket = new Socket("93.79.11.150", 1711)) {
 			BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
 			System.out.println("Connected to " + socket.getRemoteSocketAddress());
 			bufferedOutputStream.write(new Task("tit", 123).toString().getBytes());
 			bufferedOutputStream.flush();
 			bufferedOutputStream.close();
-		}
+		}*/
 
 		/*try (ServerSocket serverSocket = new ServerSocket(1711)) {
 			Socket socket = serverSocket.accept();
@@ -60,6 +62,16 @@ public class Main {
 				System.out.println(new Scanner(socket.getInputStream()).nextLine());
 			}
 		}*/
+
+		Task task1 = new Task("Пробежка1", LocalDateTime.now().minusDays(3L), LocalDateTime.now().plusDays(3L), 100);
+		Task task2 = new Task("Пробежка2", LocalDateTime.now().minusDays(2L), LocalDateTime.now().plusDays(2L), 50);
+		Task task3 = new Task("Пробежка3", LocalDateTime.now().minusDays(1L), LocalDateTime.now().plusDays(1L), 25);
+		ArrayList<Task> arrayList = new ArrayList<>();
+		arrayList.add(task1);
+		arrayList.add(task2);
+		arrayList.add(task3);
+
+		Tasks.incoming(arrayList, LocalDateTime.now().minusDays(4L), LocalDateTime.now().plusDays(4L));
 
 	}
 }
