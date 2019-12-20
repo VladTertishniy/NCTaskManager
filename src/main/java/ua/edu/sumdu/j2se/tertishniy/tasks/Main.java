@@ -1,8 +1,7 @@
 package ua.edu.sumdu.j2se.tertishniy.tasks;
 
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
@@ -63,15 +62,27 @@ public class Main {
 			}
 		}*/
 
-		Task task1 = new Task("Пробежка1", LocalDateTime.now().minusDays(3L), LocalDateTime.now().plusDays(3L), 100);
-		Task task2 = new Task("Пробежка2", LocalDateTime.now().minusDays(2L), LocalDateTime.now().plusDays(2L), 50);
-		Task task3 = new Task("Пробежка3", LocalDateTime.now().minusDays(1L), LocalDateTime.now().plusDays(1L), 25);
-		ArrayList<Task> arrayList = new ArrayList<>();
+		Task task1 = new Task("hhh", LocalDateTime.now().minusDays(3L), LocalDateTime.now().plusDays(3L), 100);
+		Task task2 = new Task("ggg", LocalDateTime.now().minusDays(2L), LocalDateTime.now().plusDays(2L), 50);
+		Task task3 = new Task("jjj", LocalDateTime.now().minusDays(1L), LocalDateTime.now().plusDays(1L), 25);
+		/*ArrayList<Task> arrayList = new ArrayList<>();
 		arrayList.add(task1);
 		arrayList.add(task2);
 		arrayList.add(task3);
 
-		Tasks.incoming(arrayList, LocalDateTime.now().minusDays(4L), LocalDateTime.now().plusDays(4L));
+		Tasks.incoming(arrayList, LocalDateTime.now().minusDays(4L), LocalDateTime.now().plusDays(4L));*/
+		AbstractTaskList arrayList1 = new ArrayTaskList();
+		arrayList1.add(task1);
+		arrayList1.add(task2);
+		arrayList1.add(task3);
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		BufferedOutputStream bufferedOutStream = new BufferedOutputStream(byteArrayOutputStream);
+//		TaskIO.write(arrayList1, bufferedOutStream);
+		TaskIO.write(arrayList1, System.out);
 
+		/*AbstractTaskList arrayList2 = new ArrayTaskList();
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream();
+		BufferedInputStream bufferedInputStream = new BufferedInputStream(byteArrayInputStream);
+		TaskIO.read(arrayList2, byteArrayInputStream);*/
 	}
 }
