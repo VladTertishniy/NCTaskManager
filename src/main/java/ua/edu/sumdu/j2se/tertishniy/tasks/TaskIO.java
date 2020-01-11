@@ -31,7 +31,6 @@ public class TaskIO {
                         dataOutputStream.writeInt(ldtTime.getBytes().length);
                         dataOutputStream.writeBytes(ldtTime);
                     }
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
