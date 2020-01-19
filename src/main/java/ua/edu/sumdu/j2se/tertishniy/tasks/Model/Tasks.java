@@ -1,4 +1,4 @@
-package ua.edu.sumdu.j2se.tertishniy.tasks;
+package ua.edu.sumdu.j2se.tertishniy.tasks.Model;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;

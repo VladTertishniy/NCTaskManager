@@ -1,4 +1,4 @@
-package ua.edu.sumdu.j2se.tertishniy.tasks;
+package ua.edu.sumdu.j2se.tertishniy.tasks.Model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -16,7 +16,7 @@ public class Task implements Cloneable, Serializable {
     public Task(String title, LocalDateTime time) {
         if (time == null) {
             throw new IllegalArgumentException("The time must be greater than 0");
-        }
+        } else
         if (title == null) {
             throw new IllegalArgumentException("The title of task must be set");
         }

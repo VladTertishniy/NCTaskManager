@@ -1,6 +1,4 @@
-package ua.edu.sumdu.j2se.tertishniy.tasks;
-
-import java.util.LinkedList;
+package ua.edu.sumdu.j2se.tertishniy.tasks.Model;
 
 public class TaskListFactory {
     	public static AbstractTaskList createTaskList(ListTypes.types type){
