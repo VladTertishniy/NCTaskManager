@@ -26,11 +26,10 @@ public class Main {
 			file.createNewFile();
 			System.out.println("Created file " + file.getAbsolutePath());
 		}
-		System.out.println("Magic bleat");
 		try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
 			TaskIO.read(arrayTaskList, objectInputStream);
 		} catch (EOFException e) {
-			System.out.println("fuck");
+			System.out.println("...");
 		}
 
 
