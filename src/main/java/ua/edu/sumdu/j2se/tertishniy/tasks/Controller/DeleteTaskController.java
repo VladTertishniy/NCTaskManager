@@ -14,7 +14,7 @@ public class DeleteTaskController extends Controller {
         int indexDelete = taskDeleteScanner.nextInt() - 1;
         Task taskDelete = arrayTaskList.getTask(indexDelete);
         if (arrayTaskList.remove(taskDelete)) {
-            System.out.println("Task successfully deleted!");
+            System.out.println("Task successfully " + taskDelete.getTitle() + " deleted!");
         }
     }
 }

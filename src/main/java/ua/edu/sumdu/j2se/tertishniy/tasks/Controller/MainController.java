@@ -38,7 +38,7 @@ public class MainController extends Controller {
                     break;
                 /*Exit*/
                 case 6:
-                    System.exit(0);
+                    return;
             }
         }
     }

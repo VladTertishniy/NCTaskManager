@@ -65,13 +65,13 @@ public class TaskIO {
         }
     }
 
-    public void writeBinary(AbstractTaskList tasks, File file) throws IOException {
+    public static void writeBinary(AbstractTaskList tasks, File file) throws IOException {
         try (BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(file))) {
             write(tasks, bufferedOutputStream);
         }
     }
 
-    public void readBinary(AbstractTaskList tasks, File file) throws IOException {
+    public static void readBinary(AbstractTaskList tasks, File file) throws IOException {
         try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file))) {
             read(tasks, bufferedInputStream);
         }

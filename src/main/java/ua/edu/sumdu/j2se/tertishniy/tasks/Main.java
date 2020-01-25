@@ -2,6 +2,7 @@ package ua.edu.sumdu.j2se.tertishniy.tasks;
 
 
 import ua.edu.sumdu.j2se.tertishniy.tasks.Controller.MainController;
+import ua.edu.sumdu.j2se.tertishniy.tasks.Controller.UserNotificationsController;
 import ua.edu.sumdu.j2se.tertishniy.tasks.Model.ArrayTaskList;
 import ua.edu.sumdu.j2se.tertishniy.tasks.Model.TaskIO;
 
@@ -26,12 +27,12 @@ public class Main {
 			file.createNewFile();
 			System.out.println("Created file " + file.getAbsolutePath());
 		}
-		try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
-			TaskIO.read(arrayTaskList, objectInputStream);
-		} catch (EOFException e) {
-			System.out.println("...");
-		}
 
+		TaskIO.readBinary(arrayTaskList, file);
+
+		UserNotificationsController thread = new UserNotificationsController(arrayTaskList);
+		thread.setDaemon(true);
+		thread.start();
 
 		MainController mainController = new MainController();
 		mainController.run(arrayTaskList);
@@ -41,8 +42,7 @@ public class Main {
 			file.delete();
 			File newFile = new File(pathName);
 			newFile.createNewFile();
-			ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(newFile));
-			TaskIO.write(arrayTaskList, objectOutputStream);
+			TaskIO.writeBinary(arrayTaskList, file);
 		}
 	}
 }

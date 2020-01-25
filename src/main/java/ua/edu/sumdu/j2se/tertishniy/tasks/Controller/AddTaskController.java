@@ -15,23 +15,26 @@ public class AddTaskController extends Controller {
         isRepeated = taskScanner.nextInt();
         switch (isRepeated) {
             case 1:
-                Scanner gg = new Scanner(System.in);
+                Scanner scannerCase1 = new Scanner(System.in);
                 System.out.println("Enter title of task:");
-                String repeatedTaskTitle = gg.nextLine();
+                String repeatedTaskTitle = scannerCase1.nextLine();
                 System.out.println("Enter start of task:");
-                LocalDateTime start = EnterLocalDateTimeController.getDate();
+                EnterLocalDateTimeController enterLocalDateTimeControllerCase1 = new EnterLocalDateTimeController();
+                LocalDateTime start = enterLocalDateTimeControllerCase1.getDate();
                 System.out.println("Enter end of task:");
-                LocalDateTime end = EnterLocalDateTimeController.getDate();
+                LocalDateTime end = enterLocalDateTimeControllerCase1.getDate();
                 System.out.println("Enter an interval:");
                 int interval = taskScanner.nextInt();
                 Task repeatedTask = new Task(repeatedTaskTitle, start, end, interval);
                 arrayTaskList.add(repeatedTask);
                 break;
             case 2:
+                Scanner scannerCase2 = new Scanner(System.in);
                 System.out.println("Enter title of task:");
-                String notRepeatedTaskTitle = taskScanner.nextLine();
+                String notRepeatedTaskTitle = scannerCase2.nextLine();
                 System.out.println("Enter time of task:");
-                LocalDateTime time = EnterLocalDateTimeController.getDate();
+                EnterLocalDateTimeController enterLocalDateTimeControllerCase2 = new EnterLocalDateTimeController();
+                LocalDateTime time = enterLocalDateTimeControllerCase2.getDate();
                 Task notRepeatedTask = new Task(notRepeatedTaskTitle, time);
                 arrayTaskList.add(notRepeatedTask);
                 break;

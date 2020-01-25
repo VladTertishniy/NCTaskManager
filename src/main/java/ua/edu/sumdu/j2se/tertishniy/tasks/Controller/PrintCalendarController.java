@@ -13,9 +13,10 @@ import java.util.SortedMap;
 public class PrintCalendarController extends Controller {
     public static void printCalendar (ArrayTaskList arrayTaskList) {
         System.out.println("Enter start date:");
-        LocalDateTime startCalendar = EnterLocalDateTimeController.getDate();
+        EnterLocalDateTimeController enterLocalDateTimeController = new EnterLocalDateTimeController();
+        LocalDateTime startCalendar = enterLocalDateTimeController.getDate();
         System.out.println("Enter end date:");
-        LocalDateTime endCalendar = EnterLocalDateTimeController.getDate();
+        LocalDateTime endCalendar = enterLocalDateTimeController.getDate();
         SortedMap<LocalDateTime, Set<Task>> result = Tasks.calendar(arrayTaskList, startCalendar, endCalendar);
         for (Map.Entry<LocalDateTime, Set<Task>> element: result.entrySet()) {
             Set<Task> setOfTasks = element.getValue();

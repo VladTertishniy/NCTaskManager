@@ -10,10 +10,8 @@ public class PrintInfoOfTasksView {
         int count = 0;
         for (Task task: arrayTaskList) {
             System.out.println( count + 1 + ". " + task.getTitle());
+            count++;
         }
-        /*for (int i = 0; i < arrayTaskList.size(); i++) {
-            System.out.println(i + ". " + arrayTaskList.getTask(i).getTitle());
-        }*/
     }
 
     public static void printInfoAboutTasks (ArrayTaskList arrayTaskList) {
@@ -21,8 +19,10 @@ public class PrintInfoOfTasksView {
         for (Task task: arrayTaskList) {
             if (task.isRepeated()) {
                 System.out.println( count + 1 + ". Title: " + task.getTitle() + "; Repeat interval: " + task.getRepeatInterval() + "; Start time: " + task.getStartTime() + "; End time: " + task.getEndTime() + "; Active: " + task.isActive());
+                count++;
             } else {
                 System.out.println( count + 1 + ". Title: " + task.getTitle() + "; Time:" + task.getTime() + "; Active: " + task.isActive());
+                count++;
             }
         }
     }
@@ -32,8 +32,10 @@ public class PrintInfoOfTasksView {
         for (Task task: setOfTasks) {
             if (task.isRepeated()) {
                 System.out.println( count + 1 + ". Title: " + task.getTitle() + "; Repeat interval: " + task.getRepeatInterval() + "; Start time: " + task.getStartTime() + "; End time: " + task.getEndTime() + "; Active: " + task.isActive());
+                count++;
             } else {
                 System.out.println( count + 1 + ". Title: " + task.getTitle() + "; Time:" + task.getTime() + "; Active: " + task.isActive());
+                count++;
             }
         }
     }

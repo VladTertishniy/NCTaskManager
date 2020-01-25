@@ -7,6 +7,5 @@ public class ChangeTaskView extends View {
         System.out.println("3. Change start time, end time and interval.");
         System.out.println("4. Change active.");
         System.out.println("5. Return to the main menu.");
-        System.out.println("6. Exit.");
     }
 }
