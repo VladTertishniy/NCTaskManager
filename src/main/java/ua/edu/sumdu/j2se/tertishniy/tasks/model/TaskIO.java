@@ -1,4 +1,4 @@
-package ua.edu.sumdu.j2se.tertishniy.tasks.Model;
+package ua.edu.sumdu.j2se.tertishniy.tasks.model;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -78,66 +78,6 @@ public class TaskIO {
     }
 
     public static void write (AbstractTaskList tasks, Writer out) throws IOException {
-        /*String baseFile = "tasks.json";
-        ObjectMapper mapper = new ObjectMapper();
-        tasks.getStream().forEach(task -> {
-                    try {
-                        mapper.writeValue(new File(baseFile), task);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-        );*/
-
-        /*JsonWriter writer;
-        writer = new JsonWriter(new FileWriter("tasks.json"));
-        writer.beginObject();
-        tasks.getStream().forEach(task ->{
-            try {
-                writer.name("title").value(task.getTitle());
-                writer.name("time").value()
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });*/
-
-        /*StringBuilder stringBuilder = new StringBuilder();
-        Gson gson = new Gson();
-        JsonWriter jsonWriter = new Gson().newJsonWriter(out);
-        tasks.getStream().forEach(task ->{
-            stringBuilder.append(gson.toJson(task));
-        });
-        try (BufferedWriter bufferedWriter = new BufferedWriter(out)) {
-            bufferedWriter.write(stringBuilder.toString());
-            bufferedWriter.flush();
-        }*/
-
-        /*JsonWriter writer = new JsonWriter(out);
-        writer.beginObject();
-        tasks.getStream().forEach(task -> {
-            try {
-                writer.beginArray();
-                writer.name("tasks");
-                writer.value(task.getTitle());
-                writer.value(task.isActive());
-                writer.value(task.getRepeatInterval());
-                writer.value(task.isRepeated());
-                if (task.isRepeated()) {
-                    String ldtStart = task.getStartTime().format(DateTimeFormatter.ISO_DATE_TIME);
-                    writer.value(ldtStart);
-                    String ldtEnd = task.getEndTime().format(DateTimeFormatter.ISO_DATE_TIME);
-                    writer.value(ldtEnd);
-                } else {
-                    String ldtTime = task.getTime().format(DateTimeFormatter.ISO_DATE_TIME);
-                    writer.value(ldtTime);
-                }
-                writer.endArray();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        writer.endObject();
-        writer.close();*/
         Gson gson = new Gson();
         String line = gson.toJson(tasks);
         out.write(line);
@@ -145,36 +85,6 @@ public class TaskIO {
     }
 
     public static void read (AbstractTaskList tasks, Reader in) throws IOException {
-        /*try (JsonReader jsonReader = new JsonReader(in)) {
-            jsonReader.beginObject();
-            while (jsonReader.hasNext()) {
-                String string = jsonReader.nextName();
-                if (string.equals("tasks")) {
-                    jsonReader.beginArray();
-                    String title = jsonReader.nextString();
-                    boolean active = jsonReader.nextBoolean();
-                    int interval = jsonReader.nextInt();
-                    boolean isRepeated = jsonReader.nextBoolean();
-                    if (isRepeated) {
-                        String ldtStart = jsonReader.nextString();
-                        LocalDateTime start = LocalDateTime.parse(ldtStart, DateTimeFormatter.ISO_DATE_TIME);
-                        String ldtEnd = jsonReader.nextString();
-                        LocalDateTime end = LocalDateTime.parse(ldtEnd, DateTimeFormatter.ISO_DATE_TIME);
-                        Task task = new Task(title, start, end, interval);
-                        task.setActive(active);
-                        tasks.add(task);
-                    } else {
-                        String ldtTime = jsonReader.nextString();
-                        LocalDateTime time = LocalDateTime.parse(ldtTime, DateTimeFormatter.ISO_DATE_TIME);
-                        Task task = new Task(title, time);
-                        task.setActive(active);
-                        tasks.add(task);
-                    }
-                    jsonReader.endArray();
-                }
-            }
-            jsonReader.endObject();
-        }*/
         BufferedReader reader = new BufferedReader(in);
         String line = reader.readLine();
         AbstractTaskList list = new Gson().fromJson(line, tasks.getClass());

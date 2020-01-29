@@ -1,4 +1,4 @@
-package ua.edu.sumdu.j2se.tertishniy.tasks.Model;
+package ua.edu.sumdu.j2se.tertishniy.tasks.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -22,27 +22,21 @@ public class Task implements Cloneable, Serializable {
         }
         this.title = title;
         this.time = time;
-        this.active = false;
+        this.active = true;
     }
 
     public Task(String title, LocalDateTime start, LocalDateTime end, int interval) {
         if (title == null) {
             throw new IllegalArgumentException("The title of task must be set");
         }
-        /*if (end <= 0) {
-            throw new IllegalArgumentException("The end must be greater than 0");
-        }*/
         if (interval <= 0) {
             throw new IllegalArgumentException("The interval must be greater than 0");
         }
-        /*if (start < 0) {
-            throw new IllegalArgumentException("The start must be greater than 0");
-        }*/
         this.title = title;
         this.end = end;
         this.interval = interval;
         this.start = start;
-        this.active = false;
+        this.active = true;
         this.repeated = true;
     }
 
@@ -102,15 +96,9 @@ public class Task implements Cloneable, Serializable {
     }
 
     public void setTime(LocalDateTime start, LocalDateTime end, int interval){
-        /*if (end <= 0) {
-            throw new IllegalArgumentException("The end must be greater than 0");
-        }*/
         if (interval <= 0) {
             throw new IllegalArgumentException("The interval must be greater than 0");
         }
-        /*if (start < 0) {
-            throw new IllegalArgumentException("The start must be greater than 0");
-        }*/
         if (!repeated) {
             this.repeated = true;
             this.start = start;
@@ -129,9 +117,6 @@ public class Task implements Cloneable, Serializable {
     }
 
     public LocalDateTime nextTimeAfter(LocalDateTime current) {
-        /*if (current < 0) {
-            throw new IllegalArgumentException("Current time can not be less than 0");
-        }*/
         if (active && !repeated){
             if (current.isBefore(time)) return time;
             else return null;
@@ -154,13 +139,6 @@ public class Task implements Cloneable, Serializable {
         if (this == o) return true;
         if (!(o instanceof Task)) return false;
         Task task = (Task) o;
-        /*return getTime() == task.getTime() &&
-                end == task.end &&
-                interval == task.interval &&
-                start == task.start &&
-                isActive() == task.isActive() &&
-                isRepeated() == task.isRepeated() &&
-                Objects.equals(getTitle(), task.getTitle());*/
         if (!((Task) o).repeated){
             return end == task.end &&
                     interval == task.interval &&

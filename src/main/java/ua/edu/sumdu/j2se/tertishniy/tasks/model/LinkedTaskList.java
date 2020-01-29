@@ -1,4 +1,4 @@
-package ua.edu.sumdu.j2se.tertishniy.tasks.Model;
+package ua.edu.sumdu.j2se.tertishniy.tasks.model;
 
 
 import java.util.Iterator;
@@ -12,16 +12,6 @@ public class LinkedTaskList extends AbstractTaskList {
     private Node head;
     private Node tail;
     private int amOfTasks;
-
-    /*@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof LinkedTaskList)) return false;
-        LinkedTaskList tasks = (LinkedTaskList) o;
-        return amOfTasks == tasks.amOfTasks &&
-                Objects.equals(head, tasks.head) &&
-                Objects.equals(tail, tasks.tail);
-    }*/
 
     @Override
     public Stream<Task> getStream() {
@@ -193,27 +183,4 @@ public class LinkedTaskList extends AbstractTaskList {
         }
         return clone;
     }
-
-
-    /*public LinkedTaskList incoming(int from, int to){
-
-        if(from < 0){
-            throw new IllegalArgumentException("The execution start can not be less than 0");
-        }
-        if(to < 0){
-            throw new IllegalArgumentException("The execution finish can not be less than 0");
-        }
-        if(to <= from){
-            throw new IllegalArgumentException("The execution finish can not be less or equal to execution start");
-        }
-        LinkedTaskList subset = new LinkedTaskList();
-        for(int i = 0; i < size(); i++) {
-            if(getTask(i).nextTimeAfter(from) > from &&  getTask(i).nextTimeAfter(from) <= to) {
-                if(getTask(i).isActive()){
-                    subset.add(getTask(i));
-                }
-            }
-        }
-        return subset;
-    }*/
 }

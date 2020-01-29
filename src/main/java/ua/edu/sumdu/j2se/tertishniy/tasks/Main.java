@@ -1,10 +1,10 @@
 package ua.edu.sumdu.j2se.tertishniy.tasks;
 
 
-import ua.edu.sumdu.j2se.tertishniy.tasks.Controller.MainController;
-import ua.edu.sumdu.j2se.tertishniy.tasks.Controller.UserNotificationsController;
-import ua.edu.sumdu.j2se.tertishniy.tasks.Model.ArrayTaskList;
-import ua.edu.sumdu.j2se.tertishniy.tasks.Model.TaskIO;
+import ua.edu.sumdu.j2se.tertishniy.tasks.controller.MainController;
+import ua.edu.sumdu.j2se.tertishniy.tasks.view.UserNotificationsView;
+import ua.edu.sumdu.j2se.tertishniy.tasks.model.ArrayTaskList;
+import ua.edu.sumdu.j2se.tertishniy.tasks.model.TaskIO;
 
 import java.io.*;
 
@@ -30,7 +30,7 @@ public class Main {
 
 		TaskIO.readBinary(arrayTaskList, file);
 
-		UserNotificationsController thread = new UserNotificationsController(arrayTaskList);
+		UserNotificationsView thread = new UserNotificationsView(arrayTaskList);
 		thread.setDaemon(true);
 		thread.start();
 

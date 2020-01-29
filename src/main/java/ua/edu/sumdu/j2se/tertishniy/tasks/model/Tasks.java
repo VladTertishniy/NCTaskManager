@@ -1,4 +1,4 @@
-package ua.edu.sumdu.j2se.tertishniy.tasks.Model;
+package ua.edu.sumdu.j2se.tertishniy.tasks.model;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -72,5 +72,4 @@ public class Tasks {
         }
         return result;
     }
-
 }

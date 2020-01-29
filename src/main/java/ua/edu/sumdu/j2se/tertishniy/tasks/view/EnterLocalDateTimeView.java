@@ -1,23 +1,27 @@
-package ua.edu.sumdu.j2se.tertishniy.tasks.Controller;
+package ua.edu.sumdu.j2se.tertishniy.tasks.view;
 
+
+import ua.edu.sumdu.j2se.tertishniy.tasks.controller.Controller;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Calendar;
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class EnterLocalDateTimeController extends Controller {
+public class EnterLocalDateTimeView extends Controller {
 
     int year;
     int month;
 
-    public LocalDateTime getDate() {
+    public LocalDateTime getDate(String enterSomethings) {
+        System.out.println(enterSomethings);
         return LocalDateTime.of(enterYear(), Month.of(enterMonth()), enterDay(), enterHour(), enterMinute());
     }
 
     private int enterYear () {
-        int year = 0;
+        int year;
         System.out.println("Year:");
         Scanner scanner = new Scanner(System.in);
         try {
@@ -31,12 +35,16 @@ public class EnterLocalDateTimeController extends Controller {
             System.out.println("Incorrect value!");
             return enterYear();
         }
+        catch (NoSuchElementException | IllegalStateException e) {
+            System.out.println("Error! Please, try again.");
+            return enterYear();
+        }
         this.year = year;
         return year;
     }
 
     private int enterMonth () {
-        int month = 0;
+        int month;
         System.out.println("Month:");
         Scanner scanner = new Scanner(System.in);
         try {
@@ -50,12 +58,16 @@ public class EnterLocalDateTimeController extends Controller {
             System.out.println("Incorrect value!");
             return enterMonth();
         }
+        catch (NoSuchElementException | IllegalStateException e) {
+            System.out.println("Error! Please, try again.");
+            return enterMonth();
+        }
         this.month = month;
         return month;
     }
 
     private int enterDay () {
-        int day = 0;
+        int day;
         System.out.println("Day:");
         Scanner scanner = new Scanner(System.in);
         try {
@@ -72,11 +84,15 @@ public class EnterLocalDateTimeController extends Controller {
             System.out.println("Incorrect value!");
             return enterDay();
         }
+        catch (NoSuchElementException | IllegalStateException e) {
+            System.out.println("Error! Please, try again.");
+            return enterDay();
+        }
         return day;
     }
 
     private int enterHour () {
-        int hour = 0;
+        int hour;
         System.out.println("Hour:");
         Scanner scanner = new Scanner(System.in);
         try {
@@ -90,11 +106,15 @@ public class EnterLocalDateTimeController extends Controller {
             System.out.println("Incorrect value!");
             return enterHour();
         }
+        catch (NoSuchElementException | IllegalStateException e) {
+            System.out.println("Error! Please, try again.");
+            return enterHour();
+        }
         return hour;
     }
 
     private int enterMinute () {
-        int minute = 0;
+        int minute;
         System.out.println("Minutes");
         Scanner scanner = new Scanner(System.in);
         try {
@@ -108,7 +128,10 @@ public class EnterLocalDateTimeController extends Controller {
             System.out.println("Incorrect value!");
             return enterMinute();
         }
+        catch (NoSuchElementException | IllegalStateException e) {
+            System.out.println("Error! Please, try again.");
+            return enterMinute();
+        }
         return minute;
     }
-
 }

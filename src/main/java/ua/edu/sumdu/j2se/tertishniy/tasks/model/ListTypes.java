@@ -1,4 +1,4 @@
-package ua.edu.sumdu.j2se.tertishniy.tasks.Model;
+package ua.edu.sumdu.j2se.tertishniy.tasks.model;
 
 public class ListTypes{
     public enum types{

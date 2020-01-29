@@ -1,4 +1,4 @@
-package ua.edu.sumdu.j2se.tertishniy.tasks.Model;
+package ua.edu.sumdu.j2se.tertishniy.tasks.model;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -119,24 +119,6 @@ public class ArrayTaskList extends AbstractTaskList {
             }
         }
     }
-
-    /*public ArrayTaskList incoming(int from, int to){
-        if (from < 0) {
-            throw new IllegalArgumentException("The from must be greater than 0");
-        }
-        if (to <= 0) {
-            throw new IllegalArgumentException("The to must be greater than 0");
-        }
-        ArrayTaskList subset = new ArrayTaskList();
-        for(int i = 0; i < amOfTasks; i++) {
-            if(taskList[i].nextTimeAfter(from) > from &&  taskList[i].nextTimeAfter(from) <= to) {
-                if(taskList[i].isActive()){
-                    subset.add(taskList[i]);
-                }
-            }
-        }
-        return subset;
-    }*/
 
     @Override
     public ArrayTaskList clone() throws CloneNotSupportedException {
