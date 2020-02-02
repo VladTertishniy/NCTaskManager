@@ -1,6 +1,7 @@
 package ua.edu.sumdu.j2se.tertishniy.tasks;
 
 
+import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.tertishniy.tasks.controller.MainController;
 import ua.edu.sumdu.j2se.tertishniy.tasks.view.UserNotificationsView;
 import ua.edu.sumdu.j2se.tertishniy.tasks.model.ArrayTaskList;
@@ -10,22 +11,36 @@ import java.io.*;
 
 public class Main {
 
+	final static Logger logger = Logger.getLogger(Main.class);
+
 	public static void main(String[] args) throws Exception {
+
+		logger.info("Program started.");
 		ArrayTaskList arrayTaskList = new ArrayTaskList();
 
 		File dir = new File(".\\src\\main\\java\\ua\\edu\\sumdu\\j2se\\tertishniy\\tasks\\saved");
 
 		if (!dir.exists()) {
-			System.out.println("Creating directory " + dir.getAbsolutePath());
-			dir.mkdir();
-			System.out.println("Created directory " + dir.getAbsolutePath());
+			try {
+				dir.mkdir();
+				logger.info("Created directory " + dir.getAbsolutePath());
+			}
+			catch (SecurityException e) {
+				System.out.println("Security error!");
+				logger.info("Security error! ");
+			}
 		}
 
 		File file = new File(".\\src\\main\\java\\ua\\edu\\sumdu\\j2se\\tertishniy\\tasks\\saved\\CollectionOfTasks.bin");
 		if(!file.exists()){
-			System.out.println("Creating file " + file.getAbsolutePath());
-			file.createNewFile();
-			System.out.println("Created file " + file.getAbsolutePath());
+			try {
+				file.createNewFile();
+				logger.info("Created file " + dir.getAbsolutePath());
+			}
+			catch (SecurityException e) {
+				System.out.println("Security error!");
+				logger.info("Security error! ");
+			}
 		}
 
 		TaskIO.readBinary(arrayTaskList, file);
@@ -39,10 +54,16 @@ public class Main {
 
 		if(file.exists()) {
 			String pathName = file.getAbsolutePath();
-			file.delete();
+			if (file.delete()) {
+				logger.info("File " + pathName + " deleted.");
+			}
 			File newFile = new File(pathName);
-			newFile.createNewFile();
+			if (newFile.createNewFile()) {
+				logger.info("New file " + newFile.getAbsolutePath() + " created.");
+			}
 			TaskIO.writeBinary(arrayTaskList, file);
+			logger.info("Information was written.");
 		}
+		logger.info("Program stoped.");
 	}
 }

@@ -1,5 +1,6 @@
 package ua.edu.sumdu.j2se.tertishniy.tasks.controller;
 
+import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.tertishniy.tasks.model.ArrayTaskList;
 import ua.edu.sumdu.j2se.tertishniy.tasks.model.Task;
 import ua.edu.sumdu.j2se.tertishniy.tasks.view.AddDeleteTaskView;
@@ -8,7 +9,11 @@ import ua.edu.sumdu.j2se.tertishniy.tasks.view.EnterLocalDateTimeView;
 import java.time.LocalDateTime;
 
 public class AddTaskController extends Controller {
+
+    final static Logger logger = Logger.getLogger(AddTaskController.class);
+
     public static void addTask (ArrayTaskList arrayTaskList) {
+        logger.info("Add task operation started.");
         int answerNumber = AddDeleteTaskView.printRepeatedQuestion();
         switch (answerNumber) {
             case 1:
@@ -19,6 +24,7 @@ public class AddTaskController extends Controller {
                 int interval = AddDeleteTaskView.enterInterval();
                 Task repeatedTask = new Task(repeatedTaskTitle, start, end, interval);
                 arrayTaskList.add(repeatedTask);
+                logger.info("Add task operation finished.");
                 break;
             case 2:
                 String notRepeatedTaskTitle = AddDeleteTaskView.enterTitleOfTask();
@@ -26,6 +32,7 @@ public class AddTaskController extends Controller {
                 LocalDateTime time = enterLocalDateTimeViewNotRepeated.getDate("Enter time of task:");
                 Task notRepeatedTask = new Task(notRepeatedTaskTitle, time);
                 arrayTaskList.add(notRepeatedTask);
+                logger.info("Add task operation finished.");
                 break;
         }
     }

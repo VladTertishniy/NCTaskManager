@@ -1,5 +1,6 @@
 package ua.edu.sumdu.j2se.tertishniy.tasks.view;
 
+import org.apache.log4j.Logger;
 import ua.edu.sumdu.j2se.tertishniy.tasks.model.ArrayTaskList;
 import ua.edu.sumdu.j2se.tertishniy.tasks.model.Task;
 
@@ -9,7 +10,11 @@ import java.util.Set;
 import java.util.SortedMap;
 
 public class PrintInfoOfTasksView {
+
+    final static Logger logger = Logger.getLogger(PrintInfoOfTasksView.class);
+
     public static void printArrayTaskListOfTasks(ArrayTaskList arrayTaskList) {
+        logger.info("Print list of tasks.");
         int count = 0;
         for (Task task: arrayTaskList) {
             System.out.println( count + 1 + ". " + task.getTitle());
@@ -18,6 +23,7 @@ public class PrintInfoOfTasksView {
     }
 
     public static void printInfoAboutTasks (ArrayTaskList arrayTaskList) {
+        logger.info("Print info about tasks.");
         int count = 0;
         for (Task task: arrayTaskList) {
             if (task.isRepeated()) {
@@ -31,6 +37,7 @@ public class PrintInfoOfTasksView {
     }
 
     public static void printInfoAboutTasks (Set<Task> setOfTasks) {
+        logger.info("Print info about tasks.");
         int count = 0;
         for (Task task: setOfTasks) {
             if (task.isRepeated()) {
@@ -44,6 +51,7 @@ public class PrintInfoOfTasksView {
     }
 
     public static void printCalendarListOfTasks(SortedMap<LocalDateTime, Set<Task>> result) {
+        logger.info("Print calendar.");
         for (Map.Entry<LocalDateTime, Set<Task>> element: result.entrySet()) {
             Set<Task> setOfTasks = element.getValue();
             LocalDateTime date = element.getKey();
